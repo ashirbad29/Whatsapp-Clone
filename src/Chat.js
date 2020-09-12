@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, IconButton } from '@material-ui/core';
-import { Chat as ChatIcon, DonutLarge, MoreVert } from '@material-ui/icons';
+import {
+	Chat as ChatIcon,
+	DonutLarge,
+	InsertEmoticon,
+	MoreVert,
+} from '@material-ui/icons';
 import './Chat.css';
 
 function Chat() {
@@ -35,7 +40,12 @@ function Chat() {
 			</div>
 
 			<div className="chat__body">
-				<p className="chat__message">Falcon op</p>
+				{/* A message */}
+				<p className={`chat__message ${true && 'chat__receiver'}`}>
+					<span className="chat__name">ashirbad behera</span>
+					Falcon op
+					<span className="chat__timeStamp">2:57pm</span>
+				</p>
 			</div>
 
 			<div className="chat__footer"></div>
