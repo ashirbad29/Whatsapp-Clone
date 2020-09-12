@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
 import { Avatar, IconButton } from '@material-ui/core';
 import { Chat, DonutLarge, MoreVert, SearchOutlined } from '@material-ui/icons';
 import SidebarChat from './SidebarChat';
+import db from './firebase';
 export default function Sidebar() {
+	const [rooms, setRooms] = useState([]);
+
+	useEffect(() => {
+		db.collection('rooms').onSnapshot(snapshot => {
+			setRooms(
+				snapshot.docs.map(doc => ({
+					id: doc.id,
+					data: doc.data(),
+				}))
+			);
+		});
+	}, []);
 	return (
 		<div className="sidebar">
 			<div className="sidebar__header">
@@ -32,9 +45,9 @@ export default function Sidebar() {
 
 			<div className="sidebar__chats">
 				<SidebarChat addNewChat={true} />
-				<SidebarChat />
-				<SidebarChat />
-				<SidebarChat />
+				{rooms.map(room => (
+					<SidebarChat key={room.id} id={room.id} name={room.data.name} />
+				))}
 			</div>
 		</div>
 	);
