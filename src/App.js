@@ -4,10 +4,12 @@ import Sidebar from './Sidebar';
 import Chat from './Chat';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './Login';
+import { useStateValue } from './StateProvider';
 
 function App() {
 	// TEMPORARY STATE
-	const [user, setUser] = useState(null);
+
+	const [{ user }, dispatch] = useStateValue();
 
 	return (
 		<div className="app">
