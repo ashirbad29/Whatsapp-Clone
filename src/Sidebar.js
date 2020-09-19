@@ -8,7 +8,7 @@ import { useStateValue } from './StateProvider';
 
 export default function Sidebar() {
 	const [rooms, setRooms] = useState([]);
-	const [{ user }, dispatch] = useStateValue();
+	const [{ user }] = useStateValue();
 
 	useEffect(() => {
 		db.collection('rooms').onSnapshot(snapshot => {
